@@ -51,7 +51,6 @@ public class NoteActivity extends AppCompatActivity {
             restoreOriginalNoteValues(savedInstanceState);
         }
 
-
         mTextNoteTitle = findViewById(R.id.text_note_title);
         mTextNoteText = findViewById(R.id.text_note_text);
         if (!mIsNewNote) {
