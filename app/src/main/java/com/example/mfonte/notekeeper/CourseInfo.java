@@ -1,6 +1,5 @@
 package com.example.mfonte.notekeeper;
 
-import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -12,6 +11,18 @@ import java.util.List;
  */
 
 public final class CourseInfo implements Parcelable {
+    public final static Parcelable.Creator<CourseInfo> CREATOR =
+            new Parcelable.Creator<CourseInfo>() {
+                @Override
+                public CourseInfo createFromParcel(Parcel source) {
+                    return new CourseInfo(source);
+                }
+
+                @Override
+                public CourseInfo[] newArray(int size) {
+                    return new CourseInfo[size];
+                }
+            };
     private final String mCourseId;
     private final String mTitle;
     private final List<ModuleInfo> mModules;
@@ -96,17 +107,4 @@ public final class CourseInfo implements Parcelable {
         dest.writeString(mTitle);
         dest.writeTypedList(mModules);
     }
-
-    public final static Parcelable.Creator<CourseInfo> CREATOR =
-            new Parcelable.Creator<CourseInfo>() {
-                @Override
-                public CourseInfo createFromParcel(Parcel source) {
-                    return new CourseInfo(source);
-                }
-
-                @Override
-                public CourseInfo[] newArray(int size) {
-                    return new CourseInfo[size];
-                }
-            };
 }

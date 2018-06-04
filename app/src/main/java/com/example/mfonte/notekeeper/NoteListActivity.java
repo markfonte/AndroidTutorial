@@ -18,6 +18,7 @@ import java.util.List;
 import static com.example.mfonte.notekeeper.NoteActivity.NOTE_POSITION;
 
 public class NoteListActivity extends AppCompatActivity {
+    private NoteRecyclerAdapter mNoteRecyclerAdapter;
 
     //private ArrayAdapter<NoteInfo> mAdapterNotes;
 
@@ -43,6 +44,7 @@ public class NoteListActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         //mAdapterNotes.notifyDataSetChanged();
+        mNoteRecyclerAdapter.notifyDataSetChanged();
     }
 
     private void initializeDisplayContent() {
@@ -62,9 +64,13 @@ public class NoteListActivity extends AppCompatActivity {
 //                startActivity(intent);
 //            }
 //        });
-        final RecyclerView recylerNotes = (RecyclerView) findViewById(R.id.list_notes);
+        final RecyclerView recyclerNotes = (RecyclerView) findViewById(R.id.list_notes);
         final LinearLayoutManager notesLayoutManager = new LinearLayoutManager(this);
-        recylerNotes.setLayoutManager(notesLayoutManager);
+        recyclerNotes.setLayoutManager(notesLayoutManager);
+
+        List<NoteInfo> notes = DataManager.getInstance().getNotes();
+        mNoteRecyclerAdapter = new NoteRecyclerAdapter(this, notes);
+        recyclerNotes.setAdapter(mNoteRecyclerAdapter);
     }
 
 }
